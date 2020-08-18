@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using VendorPortal.Data;
 using VendorPortal.Models;
 using VendorPortal.Services;
+using AssistWith.Data;
 
 namespace VendorPortal
 {
@@ -29,18 +30,31 @@ namespace VendorPortal
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+            services.AddIdentity<IdentityUser, IdentityRole>(opts => {
+                opts.Password.RequiredLength = 6;
+                opts.Password.RequireNonAlphanumeric = false;
+                opts.Password.RequireLowercase = false;
+                opts.Password.RequireUppercase = false;
+                opts.Password.RequireDigit = false;
+            }).AddEntityFrameworkStores<ApplicationDbContext>()
+              .AddDefaultTokenProviders();
+ 
 
-            // Add application services.
+            // Add application services. 
+            services.AddSingleton(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddSingleton<IConfiguration>(Configuration);
             services.AddTransient<IEmailSender, EmailSender>();
-
+            
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(
+            IApplicationBuilder app, 
+            IHostingEnvironment env,
+            UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -51,12 +65,11 @@ namespace VendorPortal
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-            }
-
-            app.UseStaticFiles();
-
+            } 
+            app.UseStaticFiles(); 
             app.UseAuthentication();
-
+            DbInitializer.Initialize(context);
+            DbInitializer.SeedData(userManager, roleManager);
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -64,5 +77,5 @@ namespace VendorPortal
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
-    }
+    } 
 }

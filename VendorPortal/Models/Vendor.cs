@@ -27,15 +27,6 @@ namespace VendorPortal.Models
         public int? VendorTypeID { get; set; }
         public virtual VendorType VendorType { get; set; }
         public virtual ICollection<VendorTag> VendorTags { get; set; }
-        //private ICollection<VendorTag> _VendorTags;
-        //public virtual ICollection<VendorTag> VendorTags 
-        //{
-        //    get { 
-        //        return _VendorTags;
-        //    }
-        //    set {
-        //        _VendorTags = value;
-        //    } 
-        //}
+   
     }
 }

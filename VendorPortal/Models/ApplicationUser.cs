@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace VendorPortal.Models
 {
-    // Add profile data for application users by adding properties to the ApplicationUser class
+    // Add profile data for application users by adding properties to the IdentityUser class
     public class ApplicationUser : IdentityUser
     {
     }
