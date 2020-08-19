@@ -9,24 +9,21 @@ namespace VendorPortal.Models
 {
     public class Vendor : IVendor
     {
-        public Vendor()
-        {
-            VendorTags = new HashSet<VendorTag>();
-        }
-        public int VendorID { get; set; } 
+        [Key]
+        public int VendorID { get; set; }
+        public ICollection<VendorCategoryMap> VendorCategoryMaps { get; set; }
+        public int? VendorTypeID { get; set; }
+        public VendorType VendorType { get; set; } 
         public string GUID{ get; set; } 
         public string VendorName { get; set; }
-        public string LoginUrl { get; set; }
+        public string LoginUrl { get; set; } 
+        public string Notes { get; set; }
+        public int SortOrder { get; set; } 
         public string Username { get; set; }
         public string PasswordSalt { get; set; }
         [Required]
-        [RegularExpression(Constants.Constants.PasswordFormat  , ErrorMessage = Constants.Constants.PasswordFormatMessage)]
+        [RegularExpression(Constants.Constants.PasswordFormat, ErrorMessage = Constants.Constants.PasswordFormatMessage)]
         public string Password { get; set; }
-        public string Notes { get; set; }
-        public int SortOrder { get; set; }
-        public int? VendorTypeID { get; set; }
-        public virtual VendorType VendorType { get; set; }
-        public virtual ICollection<VendorTag> VendorTags { get; set; }
-   
+
     }
 }

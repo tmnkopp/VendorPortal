@@ -43,8 +43,11 @@ namespace VendorPortal
             // Add application services. 
             services.AddSingleton(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddSingleton<IConfiguration>(Configuration);
+
             services.AddTransient<IEmailSender, EmailSender>();
-            
+            services.AddTransient<IVendor, Vendor>();
+            services.AddTransient<IVendorType, VendorType>();
+            services.AddTransient<IVendorCategory, VendorCategory>();
             services.AddMvc();
         }
 

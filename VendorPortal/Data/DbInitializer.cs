@@ -11,7 +11,7 @@ namespace VendorPortal.Data
         public static void Initialize(
             ApplicationDbContext context)
         {
-            context.Database.EnsureCreated();
+            //context.Database.EnsureCreated();
              
         } 
         public static async void SeedData(
