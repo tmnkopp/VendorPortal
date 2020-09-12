@@ -14,9 +14,7 @@ namespace VendorPortal.Models
         public ICollection<VendorCategoryMap> VendorCategoryMaps { get; set; }
     }
     public class VendorCategoryMap : IVendorCategoryMap
-    {
-        [Key]
-        public int VendorCategoryMapId { get; set; }
+    { 
         public int VendorId { get; set; }
         public int VendorCategoryId { get; set; }
         public Vendor Vendor { get; set; }

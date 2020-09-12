@@ -5,23 +5,24 @@ using System.Collections.Generic;
 
 namespace VendorPortal.Data.Migrations
 {
-    public partial class vendor : Migration
+    public partial class vendors : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropIndex(
-                name: "UserNameIndex",
-                table: "AspNetUsers");
             /*
-                migrationBuilder.DropIndex(
-                name: "IX_AspNetUserRoles_UserId",
-                table: "AspNetUserRoles");
+             migrationBuilder.DropIndex(
+                    name: "IX_AspNetUserRoles_UserId",
+                    table: "AspNetUserRoles");
              */
 
 
             migrationBuilder.DropIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles");
+
+            migrationBuilder.DropIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers");
 
             migrationBuilder.CreateTable(
                 name: "VendorCategory",
@@ -55,13 +56,6 @@ namespace VendorPortal.Data.Migrations
                 {
                     VendorID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    GUID = table.Column<string>(nullable: true),
-                    LoginUrl = table.Column<string>(nullable: true),
-                    Notes = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: false),
-                    PasswordSalt = table.Column<string>(nullable: true),
-                    SortOrder = table.Column<int>(nullable: false),
-                    Username = table.Column<string>(nullable: true),
                     VendorName = table.Column<string>(nullable: true),
                     VendorTypeID = table.Column<int>(nullable: true)
                 },
@@ -80,14 +74,12 @@ namespace VendorPortal.Data.Migrations
                 name: "VendorCategoryMap",
                 columns: table => new
                 {
-                    VendorCategoryMapId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    VendorCategoryId = table.Column<int>(nullable: false),
-                    VendorId = table.Column<int>(nullable: false)
+                    VendorId = table.Column<int>(nullable: false),
+                    VendorCategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VendorCategoryMap", x => x.VendorCategoryMapId);
+                    table.PrimaryKey("PK_VendorCategoryMap", x => new { x.VendorId, x.VendorCategoryId });
                     table.ForeignKey(
                         name: "FK_VendorCategoryMap_VendorCategory_VendorCategoryId",
                         column: x => x.VendorCategoryId,
@@ -103,18 +95,18 @@ namespace VendorPortal.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "UserNameIndex",
-                table: "AspNetUsers",
-                column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
                 unique: true,
                 filter: "[NormalizedName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vendor_VendorTypeID",
@@ -125,21 +117,15 @@ namespace VendorPortal.Data.Migrations
                 name: "IX_VendorCategoryMap_VendorCategoryId",
                 table: "VendorCategoryMap",
                 column: "VendorCategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_VendorCategoryMap_VendorId",
-                table: "VendorCategoryMap",
-                column: "VendorId");
             /*
-            migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUserTokens_AspNetUsers_UserId",
-                table: "AspNetUserTokens",
-                column: "UserId",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-             
-             */
+        migrationBuilder.AddForeignKey(
+            name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+            table: "AspNetUserTokens",
+            column: "UserId",
+            principalTable: "AspNetUsers",
+            principalColumn: "Id",
+            onDelete: ReferentialAction.Cascade);
+            */
 
         }
 
@@ -162,18 +148,12 @@ namespace VendorPortal.Data.Migrations
                 name: "VendorType");
 
             migrationBuilder.DropIndex(
-                name: "UserNameIndex",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles");
 
-            migrationBuilder.CreateIndex(
+            migrationBuilder.DropIndex(
                 name: "UserNameIndex",
-                table: "AspNetUsers",
-                column: "NormalizedUserName",
-                unique: true);
+                table: "AspNetUsers");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserRoles_UserId",
@@ -184,6 +164,12 @@ namespace VendorPortal.Data.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers",
+                column: "NormalizedUserName",
+                unique: true);
         }
     }
 }

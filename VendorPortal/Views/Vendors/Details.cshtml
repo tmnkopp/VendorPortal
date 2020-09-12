@@ -1,0 +1,73 @@
+﻿@model VendorPortal.Models.Vendor
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Vendor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GUID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GUID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VendorName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VendorName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LoginUrl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LoginUrl)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SortOrder)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SortOrder)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PasswordSalt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PasswordSalt)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VendorType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VendorType.VendorTypeID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.VendorID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

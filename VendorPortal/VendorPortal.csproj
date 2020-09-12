@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <Folder Include="CodeTemplates\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>

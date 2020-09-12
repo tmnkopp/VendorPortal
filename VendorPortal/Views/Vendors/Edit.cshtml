@@ -1,0 +1,75 @@
+﻿@model VendorPortal.Models.Vendor
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>Vendor</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="VendorID" />
+            <div class="form-group">
+                <label asp-for="VendorTypeID" class="control-label"></label>
+                <select asp-for="VendorTypeID" class="form-control" asp-items="ViewBag.VendorTypeID"></select>
+                <span asp-validation-for="VendorTypeID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GUID" class="control-label"></label>
+                <input asp-for="GUID" class="form-control" />
+                <span asp-validation-for="GUID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VendorName" class="control-label"></label>
+                <input asp-for="VendorName" class="form-control" />
+                <span asp-validation-for="VendorName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoginUrl" class="control-label"></label>
+                <input asp-for="LoginUrl" class="form-control" />
+                <span asp-validation-for="LoginUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label"></label>
+                <input asp-for="Notes" class="form-control" />
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SortOrder" class="control-label"></label>
+                <input asp-for="SortOrder" class="form-control" />
+                <span asp-validation-for="SortOrder" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PasswordSalt" class="control-label"></label>
+                <input asp-for="PasswordSalt" class="form-control" />
+                <span asp-validation-for="PasswordSalt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

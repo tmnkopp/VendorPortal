@@ -8,25 +8,25 @@ using System.Linq;
 using System.Web;
 using Microsoft.Extensions.Configuration;
 namespace VendorPortal.Data
-{ 
+{
     public static class DbUtils
-    { 
+    {
         public static bool TableExists(string TableName) {
-            var _config = ConfigurationHelper.GetConfiguration(Environment.CurrentDirectory);  
-            var connectionString = _config.GetConnectionString("DefaultConnection"); 
+            var _config = ConfigurationHelper.GetConfiguration(Environment.CurrentDirectory);
+            var connectionString = _config.GetConnectionString("DefaultConnection");
             SqlDataReader oReader;
-            bool result = false; 
+            bool result = false;
             using (SqlConnection myConnection = new SqlConnection(connectionString))
             {
                 SqlCommand oCmd = new SqlCommand($"SELECT * FROM sys.tables WHERE name = @TableName", myConnection);
                 SqlParameter param = new SqlParameter();
                 param.ParameterName = "@TableName";
                 param.Value = TableName;
-                oCmd.Parameters.Add(param); 
+                oCmd.Parameters.Add(param);
                 myConnection.Open();
                 using (oReader = oCmd.ExecuteReader())
                 {
-                    result = oReader.HasRows; 
+                    result = oReader.HasRows;
                     myConnection.Close();
                 }
             }
@@ -38,8 +38,8 @@ namespace VendorPortal.Data
             var _config = ConfigurationHelper.GetConfiguration(Environment.CurrentDirectory);
             var connectionString = _config.GetConnectionString("DefaultConnection");
             using (SqlConnection myConnection = new SqlConnection(connectionString))
-            { 
-                SqlCommand oCmd = new SqlCommand($"SELECT PasswordSalt From Profiles WHERE ProfileID = @ProfileID", myConnection); 
+            {
+                SqlCommand oCmd = new SqlCommand($"SELECT PasswordSalt From Profiles WHERE ProfileID = @ProfileID", myConnection);
                 SqlParameter param = new SqlParameter();
                 param.ParameterName = "@ProfileID";
                 param.Value = ProfileID;
@@ -56,6 +56,11 @@ namespace VendorPortal.Data
                 }
             }
             return result;
+        }
+        public static string ConnectionString()
+        {
+            var _config = ConfigurationHelper.GetConfiguration(Environment.CurrentDirectory);
+            return _config.GetConnectionString("DefaultConnection");
         }
     }
 

@@ -184,21 +184,6 @@ namespace VendorPortal.Data.Migrations
                     b.Property<int>("VendorID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("GUID");
-
-                    b.Property<string>("LoginUrl");
-
-                    b.Property<string>("Notes");
-
-                    b.Property<string>("Password")
-                        .IsRequired();
-
-                    b.Property<string>("PasswordSalt");
-
-                    b.Property<int>("SortOrder");
-
-                    b.Property<string>("Username");
-
                     b.Property<string>("VendorName");
 
                     b.Property<int?>("VendorTypeID");
@@ -224,18 +209,13 @@ namespace VendorPortal.Data.Migrations
 
             modelBuilder.Entity("VendorPortal.Models.VendorCategoryMap", b =>
                 {
-                    b.Property<int>("VendorCategoryMapId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("VendorId");
 
                     b.Property<int>("VendorCategoryId");
 
-                    b.Property<int>("VendorId");
-
-                    b.HasKey("VendorCategoryMapId");
+                    b.HasKey("VendorId", "VendorCategoryId");
 
                     b.HasIndex("VendorCategoryId");
-
-                    b.HasIndex("VendorId");
 
                     b.ToTable("VendorCategoryMap");
                 });

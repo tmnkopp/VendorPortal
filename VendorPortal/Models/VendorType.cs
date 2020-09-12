@@ -8,6 +8,10 @@ namespace VendorPortal.Models
 {
     public class VendorType : IVendorType
     {
+        public VendorType()
+        {
+            Vendors = new HashSet<Vendor>();
+        }
         [Key]
         public int VendorTypeID { get; set; }
         public string GUID { get; set; }
