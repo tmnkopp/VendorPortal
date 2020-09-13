@@ -10,7 +10,7 @@ namespace VendorPortal.Models
     {
         public VendorViewModel()
         {
-            //VendorCategoryList = new List<SelectListItem>();
+            VendorCategoryList = new List<SelectListItem>();
         }
         public Vendor Vendor { get; set;  }
         public List<SelectListItem> VendorCategoryList { get; set; }

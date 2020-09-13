@@ -180,7 +180,7 @@ namespace VendorPortal.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["VendorTypeID"] = new SelectList(_context.VendorTypes, "VendorTypeID", "VendorTypeID", model.VendorTypeID);
+            //ViewData["VendorTypeID"] = new SelectList(_context.VendorTypes, "VendorTypeID", "VendorTypeID", model.VendorTypeID);
             return View(model);
         }
 
